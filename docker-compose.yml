@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  event_catalog:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    container_name: event_catalog_app
+    volumes:
+      - ./domains/:/home/node/domains/
+      - ./events/:/home/node/events/
+      - ./public/:/home/node/public/
+      - ./services/:/home/node/services/
+      - ./eventcatalog.config.js:/home/node/eventcatalog.config.js
+
+  # start_dependencies:
+  #   image: dadarek/wait-for-dependencies
+  #   depends_on:
+  #     - database
+  #   command: database:5432
